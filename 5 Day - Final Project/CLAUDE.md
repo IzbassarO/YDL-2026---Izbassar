@@ -43,22 +43,25 @@ config.py        все ключи, пути, пороги, лимиты
 5. На вопрос: эмбеддим вопрос → ищем top-4 → проверяем порог → собираем контекст
    → gemma4 с системным промптом → ответ + показ источников.
 
-## 4. API (рабочие ключи уже в config.py)
+## 4. API (ключи в .env, НЕ в репозитории)
+
+> Все секреты лежат в `.env` (см. `.env.example`), читаются через `config.py`.
+> В этот файл и в код реальные ключи НЕ вписываем.
 
 **Chat (gemma4):**
 - URL: `https://llm.alem.ai/v1/chat/completions`
-- Auth: `Bearer ***REMOVED***`
+- Auth: `Bearer $CHAT_KEY`
 - Тело: `{"model":"gemma4","messages":[{"role":"user","content":"..."}]}`
 - Ответ: OpenAI-совместимый → `choices[0].message.content`
 
 **Embeddings (text-1024, размерность 1024):**
 - URL: `https://llm.alem.ai/v1/embeddings`
-- Auth: `Bearer ***REMOVED***`
+- Auth: `Bearer $EMB_KEY`
 - Тело: `{"model":"text-1024","input":"..."}`
 - Ответ: `data[0].embedding`
 
 **Email (MailerSend):**
-- Ключ в config.py, отправитель `info@app.commit.kz`.
+- Ключ `$MAILERSEND_KEY` в `.env`, отправитель `info@app.commit.kz`.
 - Получатель ВСЕГДА `izok2004@gmail.com` (свой адрес).
 
 > Только gemma4. Grok/другие модели НЕ используем — лишние точки отказа на демо.
