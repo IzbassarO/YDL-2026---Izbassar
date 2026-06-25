@@ -1,0 +1,15 @@
+Шаг 1a: OOF R2 восстановления eog_burst_index (на наблюдаемых строках):
+   BayesianRidge  R2=0.874
+   KNN            R2=0.576
+   ExtraTrees     R2=0.760
+   HGB            R2=0.809
+
+Шаг 1b: V5 CV f1_macro (multi-seed 0,1,42) по импьютеру:
+   BayesianRidge(текущий)   0.8440 ± 0.0011  (median baseline=0.8365, BayesRidge-II=0.8440)
+       per-class: Wake=0.87 Light=0.859 Deep=0.799 REM=0.844 | no-eog=0.8294
+   ExtraTreesReg            0.8364 ± 0.0009  (median baseline=0.8365, BayesRidge-II=0.8440)
+       per-class: Wake=0.863 Light=0.853 Deep=0.793 REM=0.84 | no-eog=0.8196
+   HGBReg                   0.8378 ± 0.0001  (median baseline=0.8365, BayesRidge-II=0.8440)
+       per-class: Wake=0.866 Light=0.853 Deep=0.792 REM=0.84 | no-eog=0.8197
+
+Лучший импьютер: BayesianRidge(текущий) = 0.8440

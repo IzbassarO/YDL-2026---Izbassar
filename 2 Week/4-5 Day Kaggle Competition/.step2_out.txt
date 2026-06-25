@@ -1,0 +1,7 @@
+Шаг 2: перетюнинг на импутированном пространстве (cv seed42, f1_macro)
+  SVC best=0.8357 {'m__C': 50, 'm__gamma': 0.005} (старое C=80,g=0.008)
+  HGB best=0.8341
+   {'l2_regularization': np.float64(2.607), 'learning_rate': np.float64(0.021), 'max_iter': 457, 'max_leaf_nodes': 43, 'min_samples_leaf': 58}
+  MLP best=0.8343
+   {'m__activation': 'tanh', 'm__alpha': np.float64(0.0028), 'm__hidden_layer_sizes': (256, 128, 64), 'm__learning_rate_init': np.float64(0.00054)}
+  ExtraTrees best=0.8312 {'max_features': np.float64(0.624), 'min_samples_leaf': 1, 'n_estimators': 530}
