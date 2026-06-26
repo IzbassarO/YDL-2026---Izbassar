@@ -1,0 +1,81 @@
+=== FEATURES (21) ===
+eeg_delta_power, eeg_theta_power, eeg_alpha_power, eeg_sigma_power, eeg_beta_power, eeg_gamma_power, eeg_slow_osc_power, eeg_spectral_entropy, eeg_spindle_density, eeg_kcomplex_rate, emg_chin_tone, emg_tone_variance, eog_movement_density, eog_amplitude, heart_rate_mean, heart_rate_variability, respiration_rate, respiration_variability, spo2_mean, body_movement_index, eog_burst_index
+
+=== SKEWNESS (|skew|>1 => transform candidate) ===
+  eeg_slow_osc_power           -0.05
+  respiration_variability      -0.05
+  heart_rate_variability       +0.05
+  eeg_alpha_power              -0.04
+  eeg_beta_power               -0.04
+  emg_chin_tone                -0.03
+  spo2_mean                    -0.02
+  emg_tone_variance            +0.02
+  eog_amplitude                -0.02
+  eeg_spectral_entropy         +0.02
+  body_movement_index          -0.02
+  eog_burst_index              -0.02
+  eeg_theta_power              -0.02
+  eeg_gamma_power              -0.02
+  eeg_sigma_power              +0.01
+  eeg_spindle_density          -0.01
+  heart_rate_mean              -0.01
+  eeg_delta_power              +0.01
+  respiration_rate             +0.01
+  eog_movement_density         -0.01
+  eeg_kcomplex_rate            -0.00
+
+=== HIGH CORRELATIONS |r|>0.6 ===
+  eeg_beta_power ~ eeg_spectral_entropy: -0.82
+  eeg_spindle_density ~ respiration_variability: +0.80
+  eeg_delta_power ~ heart_rate_variability: +0.76
+  eeg_alpha_power ~ eeg_spectral_entropy: -0.75
+  eeg_spindle_density ~ eog_movement_density: -0.74
+  eog_movement_density ~ heart_rate_mean: +0.73
+  eog_movement_density ~ heart_rate_variability: -0.73
+  eeg_alpha_power ~ emg_chin_tone: +0.72
+  eeg_spectral_entropy ~ emg_tone_variance: +0.70
+  eeg_spectral_entropy ~ eog_amplitude: -0.69
+  heart_rate_mean ~ heart_rate_variability: -0.67
+  eeg_sigma_power ~ eeg_slow_osc_power: -0.66
+  eeg_theta_power ~ body_movement_index: +0.65
+  eeg_sigma_power ~ eeg_gamma_power: -0.63
+  eeg_spindle_density ~ spo2_mean: -0.63
+  emg_chin_tone ~ heart_rate_mean: +0.63
+  eeg_theta_power ~ spo2_mean: -0.63
+  eeg_gamma_power ~ eeg_slow_osc_power: +0.62
+  eeg_gamma_power ~ heart_rate_variability: -0.62
+  eeg_spectral_entropy ~ emg_chin_tone: -0.62
+  eeg_beta_power ~ emg_tone_variance: -0.61
+  eog_movement_density ~ respiration_rate: +0.61
+  eeg_delta_power ~ heart_rate_mean: -0.61
+  respiration_variability ~ body_movement_index: +0.61
+  eeg_gamma_power ~ emg_chin_tone: +0.61
+  eeg_alpha_power ~ eeg_beta_power: +0.61
+
+PCA explained var PC1,PC2 = 0.27, 0.26
+
+Top-4 ANOVA features for pair plots: heart_rate_variability, eog_movement_density, eeg_alpha_power, eog_burst_index
+
+=== PER-CLASS MEAN Z-SCORE (which features mark each stage) ===
+                         Wake  Light  Deep   REM
+eeg_delta_power          0.25  -0.48 -0.11  0.39
+eeg_theta_power          0.29   0.17 -0.17 -0.27
+eeg_alpha_power         -0.34   0.81 -0.19 -0.37
+eeg_sigma_power         -0.14  -0.40 -0.22  0.75
+eeg_beta_power           0.49   0.37 -0.36 -0.47
+eeg_gamma_power         -0.17   0.61  0.08 -0.57
+eeg_slow_osc_power      -0.57   0.54  0.23 -0.30
+eeg_spectral_entropy    -0.27  -0.46  0.46  0.27
+eeg_spindle_density      0.65  -0.18 -0.57  0.17
+eeg_kcomplex_rate        0.61  -0.31  0.03 -0.22
+emg_chin_tone            0.11   0.45  0.10 -0.66
+emg_tone_variance       -0.18  -0.25  0.28  0.15
+eog_movement_density    -0.81   0.56  0.38 -0.26
+eog_amplitude            0.65   0.09 -0.41 -0.26
+heart_rate_mean         -0.20   0.43  0.32 -0.58
+heart_rate_variability   0.63  -0.74 -0.24  0.47
+respiration_rate        -0.84   0.30  0.28  0.14
+respiration_variability  0.26   0.20 -0.54  0.09
+spo2_mean               -0.64   0.45  0.10 -0.02
+body_movement_index      0.00   0.18 -0.12 -0.07
+eog_burst_index          0.96  -0.61  0.47 -0.67

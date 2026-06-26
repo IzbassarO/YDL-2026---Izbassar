@@ -1,0 +1,20 @@
+=== solution.ipynb: errors=0 ===
+  | OOF R² восстановления eog_burst_index из других признаков (BayesianRidge) = 0.874
+  | V5 + median imputer       CV macro-F1 = 0.8367
+  | V5 + IterativeImputer     CV macro-F1 = 0.8432   (+0.0065)
+  | OOF macro-F1 = 0.8432 | accuracy = 0.8429
+  | macro-F1 на эпохах С eog = 0.8569 | БЕЗ eog = 0.8294
+  | Top-2 accuracy = 0.974
+  | submission_05.csv: записан, формат OK=True, распределение ['Wake=22.5%', 'Light=25.7%', 'Deep=2
+  | submission_06.csv: записан, формат OK=True, распределение ['Wake=22.6%', 'Light=25.6%', 'Deep=2
+=== nb_submission_04.ipynb: errors=0 ===
+  | V5 + median CV macro-F1 (seed42) = 0.8367
+  | submission_04.csv записан; распределение ['Wake=22.4%', 'Light=25.7%', 'Deep=25.6%', 'REM=26.3%
+
+=== submission files (rows) ===
+  submission.csv: 5000 rows
+  submission_03.csv: 5000 rows
+  submission_04.csv: 5000 rows
+  submission_05.csv: 5000 rows
+  submission_06.csv: 5000 rows
+  submission_robust.csv: 5000 rows
