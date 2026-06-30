@@ -16,7 +16,7 @@ indexes over those lines:
 | Method | What it compares | Technique | Strong at |
 |--------|------------------|-----------|-----------|
 | **tf-idf** | matching **words** | tf-idf + cosine | exact words |
-| **GloVe** | the **meaning** of a line | averaged embeddings + cosine | synonyms, mood |
+| **GloVe** | the **meaning** of a line | idf-weighted averaged embeddings + cosine | synonyms, mood |
 | **trigram** | **3-character chunks** (lon·ond·ndo·don) | char-3gram + cosine | typos, fuzzy |
 
 > No heavy models (no BERT/Gemma) — only Day-2 tools: tf-idf, averaged word embeddings,
@@ -25,6 +25,11 @@ indexes over those lines:
 **The core idea:** the query *"feeling heartbroken and alone"* matched by keywords only finds lines that
 literally contain "feeling"; matched by meaning it finds genuinely sad lines like *"Feeling sad and all
 alone"* — even with no shared words.
+
+**Two quality tricks we apply:** (1) when averaging word vectors we **weight each word by its idf**, so
+fillers like *the / and / I* barely count and content words dominate the meaning vector (plain averaging
+lets stop-words wash the signal out); (2) results are **de-duplicated** and capped at 2 lines per song,
+so the top-N stays diverse instead of repeating one chorus.
 
 **Note on the corpus:** we search the **lyric text itself** (one line per document). The artist and song
 title are only labels showing where each line came from — we do **not** search by title or author."""))
