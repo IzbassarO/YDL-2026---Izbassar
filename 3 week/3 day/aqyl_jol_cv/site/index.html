@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aqyl Jol · Vision — a Day-3 computer-vision build</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="scan-progress" id="progress"></div>
+<canvas id="road"></canvas>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a class="brand" href="#top"><span class="brand-mark"></span> Aqyl&nbsp;Jol<span class="brand-sub">/ vision</span></a>
+  <nav class="nav-links">
+    <a href="#reference">Aqyl Jol</a>
+    <a href="#build">The build</a>
+    <a href="#models">Models</a>
+    <a href="#stack">Stack</a>
+  </nav>
+  <a class="nav-cta" href="#models">See it work →</a>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="kicker reveal">YDL 2026 · Applied Deep Learning · Day 3</p>
+      <h1 class="reveal">The eyes of a <span class="hl">smart road.</span></h1>
+      <p class="lede reveal">Three neural networks that read the street — spotting road hazards, reading the
+        weather, and tracking traffic. A local, hands-on rebuild of the computer-vision layer behind
+        <strong>Aqyl&nbsp;Jol</strong>, an AI digital twin for the city.</p>
+      <div class="hero-actions reveal">
+        <a class="btn btn-primary" href="#models">Explore the models</a>
+        <a class="btn btn-ghost" href="#reference">About Aqyl Jol</a>
+      </div>
+      <div class="hero-meta reveal">
+        <span><b>3</b> CNN models</span><span class="dot"></span>
+        <span><b>5,000+</b> images</span><span class="dot"></span>
+        <span>trained on <b>MacBook&nbsp;M1</b></span>
+      </div>
+    </div>
+
+    <div class="hero-feed reveal">
+      <div class="feed-frame">
+        <div class="feed-top"><span class="live"><i></i> LIVE</span><span class="feed-label">yolov8 · astana</span></div>
+        <div class="feed-img">
+          <img src="assets/aqyljol_detect1.png" alt="Vehicle detection on Astana streets">
+          <span class="scanline"></span>
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <div class="feed-foot"><span>vehicles · 7</span><span>road · clear</span><span>fps · 118</span></div>
+      </div>
+    </div>
+  </div>
+  <a href="#reference" class="scrollcue">scroll<span></span></a>
+</section>
+
+<!-- REFERENCE: AQYL JOL -->
+<section class="section" id="reference">
+  <div class="section-head reveal">
+    <span class="index">01</span>
+    <div>
+      <p class="kicker">The parent project</p>
+      <h2>Aqyl Jol — an AI digital twin for the city</h2>
+    </div>
+  </div>
+  <div class="ref-grid">
+    <div class="ref-text reveal">
+      <p><strong>Aqyl Jol</strong> (Kazakh for “Smart Road”) is an AI-based digital twin for energy-efficient urban
+      transport and municipal fleet coordination. It fuses <strong>computer vision (YOLOv8/v11)</strong>, causal
+      machine learning, a multilingual LLM assistant, and an iOS app — turning ordinary city cameras into a
+      real-time understanding of traffic and road hazards.</p>
+      <p>Validated in <strong>Astana</strong> (−40°C to +40°C), it powers snowplow routing, congestion-aware
+      navigation and fleet dispatch that cut fuel and emissions. This Day-3 build reproduces its
+      <em>perception layer</em> — the part that turns pixels into “what's on the road”.</p>
+      <ul class="ref-facts">
+        <li><b>0.58–0.70</b><span>vehicle AP<sub>0.5</sub></span></li>
+        <li><b>60–125</b><span>FPS detection</span></li>
+        <li><b>0.69–0.85</b><span>road-hazard mAP<sub>50</sub></span></li>
+        <li><b>78–85%</b><span>congestion accuracy</span></li>
+      </ul>
+      <p class="ref-award">🏆 Winner, Meta Llama Accelerator (Track 3) · Presented at Digital Bridge 2025, Astana</p>
+    </div>
+    <div class="ref-gallery">
+      <figure class="reveal"><img src="assets/aqyljol_detect1.png" alt="Astana congested traffic detection"><figcaption>Vehicle detection on Astana streets — cars &amp; buses, real traffic.</figcaption></figure>
+      <figure class="reveal"><img src="assets/aqyljol_detect2.png" alt="Mixed scene detection"><figcaption>Mixed scene — trucks, cars and pedestrians at an intersection.</figcaption></figure>
+      <figure class="reveal wide"><img src="assets/aqyljol_metrics.png" alt="Road-hazard model metrics"><figcaption>Road-hazard model — precision-recall, F1 and confusion matrix.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- BUILD INTRO -->
+<section class="section band" id="build">
+  <div class="section-head reveal">
+    <span class="index">02</span>
+    <div>
+      <p class="kicker">This build</p>
+      <h2>Rebuilding the vision layer, on a laptop</h2>
+    </div>
+  </div>
+  <p class="band-lede reveal">I rebuilt the perception layer with <strong>three convolutional networks</strong>,
+    each matched to its data — all trained and run locally on Apple-Silicon (MPS), no cloud. Two <em>detectors</em>
+    draw typed boxes; one <em>classifier</em> reads the weather. Together: <b>what hazard is on the road</b>,
+    <b>what the weather is</b>, and <b>what vehicles are moving</b>.</p>
+</section>
+
+<!-- MODELS -->
+<section class="section" id="models">
+  <!-- Model 1 -->
+  <article class="model reveal">
+    <div class="model-media">
+      <img src="assets/road_damage_detections.png" alt="Road damage detection with typed boxes">
+    </div>
+    <div class="model-copy">
+      <span class="model-tag">Model 01 · Detection</span>
+      <h3>Road quality</h3>
+      <p class="model-arch">YOLOv8 · fine-tuned on 2,009 road images</p>
+      <p>Finds surface hazards and boxes each one with its type — <b>pothole</b>, <b>crack</b>, <b>manhole</b>.
+        The road-side twin of the vehicle detector: it marks <em>where</em> and <em>what</em> the damage is.</p>
+      <div class="model-metric"><span class="big" data-count="40" data-suffix="%">0</span><span class="lbl">mAP<sub>50</sub> ≈ 0.40 · ~12 epochs on MPS</span></div>
+    </div>
+  </article>
+
+  <!-- Model 2 -->
+  <article class="model reverse reveal">
+    <div class="model-media stack2">
+      <img src="assets/road_gradcam.png" alt="Grad-CAM attention of the weather classifier">
+      <img src="assets/road_confusion.png" alt="Confusion matrix of the weather classifier">
+    </div>
+    <div class="model-copy">
+      <span class="model-tag">Model 02 · Classification</span>
+      <h3>Road condition</h3>
+      <p class="model-arch">ResNet18 · transfer learning on DAWN</p>
+      <p>Reads the weather on the road — <b>fog</b>, <b>rain</b>, <b>snow</b>, <b>sand</b>. A frozen ImageNet
+        backbone with a fresh head. <b>Grad-CAM</b> confirms it looks at road, sky and weather texture — not artifacts.</p>
+      <div class="model-metric"><span class="big" data-count="82" data-suffix="%">0</span><span class="lbl">validation accuracy · snow 0.93 · sand 0.87</span></div>
+    </div>
+  </article>
+
+  <!-- Model 3 -->
+  <article class="model reveal">
+    <div class="model-media">
+      <video src="assets/traffic_web.mp4" autoplay muted loop playsinline></video>
+    </div>
+    <div class="model-copy">
+      <span class="model-tag">Model 03 · Detection</span>
+      <h3>Traffic in motion</h3>
+      <p class="model-arch">YOLOv8 · pretrained (COCO), run on video</p>
+      <p>Detects and types vehicles as they move — <b>car</b>, <b>bus</b>, <b>bicycle</b>, <b>truck</b> — drawing a
+        labelled box on each. Real-time on a laptop GPU, echoing Aqyl Jol's 60–125 FPS.</p>
+      <div class="model-metric"><span class="big" data-count="50" data-suffix=" FPS">0</span><span class="lbl">on MacBook M1 (MPS) · typed boxes in motion</span></div>
+    </div>
+  </article>
+</section>
+
+<!-- METRICS BAND -->
+<section class="counters">
+  <div class="counter reveal"><span class="c-num" data-count="3">0</span><span class="c-lbl">CNN models</span></div>
+  <div class="counter reveal"><span class="c-num" data-count="5000" data-suffix="+">0</span><span class="c-lbl">training images</span></div>
+  <div class="counter reveal"><span class="c-num" data-count="8">0</span><span class="c-lbl">hazard &amp; vehicle types</span></div>
+  <div class="counter reveal"><span class="c-num" data-count="0">0</span><span class="c-lbl">cloud GPUs used</span></div>
+</section>
+
+<!-- STACK -->
+<section class="section" id="stack">
+  <div class="section-head reveal">
+    <span class="index">03</span>
+    <div>
+      <p class="kicker">Under the hood</p>
+      <h2>The technology</h2>
+    </div>
+  </div>
+  <div class="chips reveal">
+    <span class="chip">PyTorch 2.12</span>
+    <span class="chip accent">Apple MPS (Metal)</span>
+    <span class="chip">Ultralytics YOLOv8</span>
+    <span class="chip">torchvision ResNet18</span>
+    <span class="chip">Transfer Learning</span>
+    <span class="chip">Grad-CAM</span>
+    <span class="chip">OpenCV</span>
+    <span class="chip">scikit-learn</span>
+    <span class="chip">Kaggle Datasets</span>
+    <span class="chip">Jupyter</span>
+  </div>
+  <div class="how reveal">
+    <div class="how-item"><span class="how-n">detection</span><p>Two <b>YOLOv8</b> models draw typed bounding boxes — one fine-tuned on road damage, one pretrained for vehicles.</p></div>
+    <div class="how-item"><span class="how-n">classification</span><p>A <b>ResNet18</b> with a frozen backbone and a new 4-class head — transfer learning on ~1k weather images.</p></div>
+    <div class="how-item"><span class="how-n">explainability</span><p><b>Grad-CAM</b> overlays the network's attention, proving it keys on the road — not the frame.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-main">
+    <p class="foot-title">Aqyl Jol · Vision</p>
+    <p class="foot-sub">Day-3 computer-vision build for YDL 2026 — a miniature of the Aqyl Jol perception layer,
+      trained and run entirely on a laptop.</p>
+  </div>
+  <div class="footer-meta">
+    <span>Izbassar Orynbassar</span>
+    <span>References: Aqyl Jol (Orynbassar et al., 2025)</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

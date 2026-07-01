@@ -1,0 +1,19 @@
+# === Heavy Day-3 CV: datasets, training runs, model weights (kept local) ===
+3 week/3 day/aqyl_jol_cv/data/
+3 week/3 day/aqyl_jol_cv/runs/
+
+# === Heavy Day-2 data (Spotify CSV, GloVe, indexes) ===
+3 week/2 day/lyric_search/data/
+
+# === Large / generated binaries anywhere ===
+*.pt
+*.npy
+*.pkl
+*.parquet
+*.zip
+*.gz
+
+# === Python / Jupyter / OS junk ===
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

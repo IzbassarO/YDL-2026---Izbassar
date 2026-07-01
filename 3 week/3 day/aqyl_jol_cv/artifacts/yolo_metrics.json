@@ -1,0 +1,12 @@
+{
+ "frames": 647,
+ "seconds": 13.0,
+ "fps": 49.8,
+ "device": "mps",
+ "counts": {
+  "car": 75,
+  "bicycle": 57,
+  "bus": 1
+ },
+ "source": "data/person-bicycle-car-detection.mp4"
+}

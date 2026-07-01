@@ -1,0 +1,12 @@
+{
+ "weights": "runs/detect/runs/roaddamage/weights/best.pt",
+ "classes": {
+  "0": "pothole",
+  "1": "crack",
+  "2": "manhole"
+ },
+ "demo_counts": {
+  "manhole": 2,
+  "pothole": 2
+ }
+}
